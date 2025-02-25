@@ -6,11 +6,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-
 class ExcelTesting {
   var excel = Excel.createExcel();
   List<Map<String, dynamic>> dataList = []; // قائمة لتخزين البيانات
-
 
   void createExcelFile(List data) async {
     Sheet _sheet = excel['sheet2'];
@@ -49,13 +47,14 @@ class ExcelTesting {
     if (result != null) {
       File file = File(result.files.single.path!);
       print("Selected Path $file");
-      var byte = file!.readAsBytesSync();
+      var byte = file.readAsBytesSync();
       var excelRead = Excel.decodeBytes(byte);
-      int j = 0;
-      int i = 0;
+      // int j = 0;
+      // int i = 0;
       List<String> headers = []; // قائمة لحفظ أسماء الأعمدة
 
       for (var table in excelRead.tables.keys) {
+        int i = 1;
         var sheet = excelRead.tables[table];
         if (sheet != null) {
           int rowIndex = 0;
@@ -77,23 +76,13 @@ class ExcelTesting {
                         ('${rowData['Name Student']}',${rowData['Age']},'${rowData['grade']}')
                         '''); // اضافة البيانات من ملف الاكسل الى قاعدة البيانات
             }
-
             rowIndex++;
           }
         }
       }
-
-      // ✅ طباعة البيانات على شكل ماب
-      for (var row in dataList) {
-        print(row);
-      }
-    } else {
-      print("❌ لم يتم اختيار أي ملف");
     }
-
     return respone;
   }
-
 }
 
 ExcelTesting excelTesting = ExcelTesting();

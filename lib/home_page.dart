@@ -14,11 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  readFile() async {
-    List<Map> data = await sqlDb.readData('''
-                                          SELECT * FROM Students;
-                                    ''');
-  }
+  // readFile() async {
+  //   List<Map> data = await sqlDb.readData('''
+  //     SELECT * FROM Students;
+  //                                   ''');
+  // }
 
   @override
   Widget build(BuildContext context) {

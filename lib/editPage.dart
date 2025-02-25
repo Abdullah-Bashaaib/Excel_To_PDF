@@ -28,7 +28,7 @@ class _EditpageState extends State<Editpage> {
     await PdfExport.generatePdf();
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text("تم التحويل إلى PDF بنجاح! \nالمسار: "),
         duration: Duration(seconds: 3),
         behavior: SnackBarBehavior.floating,
@@ -42,15 +42,15 @@ class _EditpageState extends State<Editpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edting Data"),
+        title: const Text("Edting Data"),
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.deepPurple.shade200,
@@ -75,7 +75,7 @@ class _EditpageState extends State<Editpage> {
                               leading: CircleAvatar(
                                 child: Text("${index + 1}"),
                               ),
-                              trailing: Container(
+                              trailing: SizedBox(
                                 width: 96,
                                 child: Row(
                                   children: [
@@ -90,7 +90,7 @@ class _EditpageState extends State<Editpage> {
                                           ),
                                         );
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.edit,
                                         color: Colors.amber,
                                       ),
@@ -100,13 +100,13 @@ class _EditpageState extends State<Editpage> {
                                         String? studentId =
                                             excelTesting.dataList[index]['Name Student'];
 
-                                        var check = await sqlDb.readData(
-                                            'SELECT id FROM STUDENTS ');
-                                        if (check.isEmpty) {
-                                          print("⚠️ لا يوجد سجل بهذا ID!");
-                                        }else{
-                                          print('id = $studentId ============');
-                                        }
+                                        // var check = await sqlDb.readData(
+                                        //     'SELECT id FROM STUDENTS ');
+                                        // if (check.isEmpty) {
+                                        //   print("⚠️ لا يوجد سجل بهذا ID!");
+                                        // }else{
+                                        //   print('id = $studentId ============');
+                                        // }
 
                                         if (studentId == null) {
                                           print(
@@ -130,7 +130,7 @@ class _EditpageState extends State<Editpage> {
                                           ),
                                         );
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.delete,
                                         color: Colors.redAccent,
                                       ),
@@ -142,7 +142,7 @@ class _EditpageState extends State<Editpage> {
                           );
                         }),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ElevatedButton(
@@ -155,12 +155,12 @@ class _EditpageState extends State<Editpage> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  var _per = await Permission.storage.request();
-                  if (_per.isGranted) {
+                  var per = await Permission.storage.request();
+                  if (per.isGranted) {
                     PdfExport.generatePdf();
                     print("================================ Here");
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text("تم التحويل إلى PDF بنجاح!"),
                         duration: Duration(seconds: 3),
                         behavior: SnackBarBehavior.floating,
@@ -169,7 +169,7 @@ class _EditpageState extends State<Editpage> {
                     );
                   }
                 },
-                child: Text("To PDF"),
+                child: const Text("To PDF"),
               ),
             ],
           ),
